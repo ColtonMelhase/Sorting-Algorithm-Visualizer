@@ -1,0 +1,12 @@
+
+header {
+    display: flex;
+}
+#stage {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.bar {
+    background-color: aqua;
+}
