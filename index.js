@@ -3,6 +3,13 @@
 arr = [];
 size = 500;
 
+function swap(arr, idx1, idx2) {
+    // console.log(`Swapping index ${idx1} and ${idx2}`)
+    let temp = arr[idx1];
+    arr[idx1] = arr[idx2];
+    arr[idx2] = temp;
+}
+
 function gen_random_array(arr) {
     arr = [];
     for(let i = 0; i < size; i++) {
@@ -10,6 +17,9 @@ function gen_random_array(arr) {
         arr.push(i+1);
     }
 
+    for(let i = 0; i < size*5; i++) {
+        swap(arr, Math.floor(Math.random() * size*2), Math.floor(Math.random() * size*2))
+    }
     console.log(arr);
     render(arr);
 }
