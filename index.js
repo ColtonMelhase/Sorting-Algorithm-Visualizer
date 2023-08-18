@@ -1,7 +1,12 @@
 
 
-arr = [];
-size = 500;
+mainArr = [];
+size = 120;
+stage = document.getElementById("stage");
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function swap(idx1, idx2, e1, e2) {
     // console.log(`Swapping index ${idx1} and ${idx2}`)
