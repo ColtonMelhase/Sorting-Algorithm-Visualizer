@@ -55,15 +55,41 @@ async function gen_random_array() {
         swap(idx1, idx2, bars[idx1], bars[idx2])
     }
 
-    // console.log(`Numbers: ${mainArr}`);
+    console.log(`Numbers: ${mainArr}`);
     // console.log(stage.children)
     
 }
 
+async function check() {
+    let stage = document.getElementById("stage");
+    var bars = stage.children;
+
+    //remove all background colors
+    for(let i = 0; i < bars.length; i++) {
+        bars[i].style.backgroundColor = "white"
+    }
+
+    for(let i = 0; i < mainArr.length; i++) {
+        if(mainArr[i] > mainArr[i + 1]) {
+            bars[i].style.backgroundColor = "red";
+            bars[i + 1].style.backgroundColor = "red";
+            console.log("BAD SORT!");
+        }
+        else {
+            bars[i].style.backgroundColor = "green";
+        }
+        await sleep(1);
+    }
+
+    await sleep(1000);
+    for(let i = 0; i < bars.length; i++) {
+        bars[i].style.backgroundColor = "white"
+    }
+}
 
 async function bubble_sort() {
     let stage = document.getElementById("stage");
-    let bars = stage.children;
+    var bars = stage.children;
 
     for(let i = 0; i < mainArr.length; i++) {
         for(let j = 0; j < (mainArr.length-i-1); j++) {
@@ -78,25 +104,43 @@ async function bubble_sort() {
             bars[j + 1].style.backgroundColor = "white";
         }
         
-        // bars[size-i].style.backgroundColor = "green";
+        // bars[size-i-1].style.backgroundColor = "green";
     }
 
     check();
 }
 
-async function check() {
+async function insertion_sort() {
     let stage = document.getElementById("stage");
-    let bars = stage.children;
+    var bars = stage.children;
 
-    for(let i = 0; i < mainArr.length; i++) {
-        if(mainArr[i] > mainArr[i + 1]) {
-            bars[i].style.backgroundColor = "red";
-            bars[i + 1].style.backgroundColor = "red";
-            console.log("BAD SORT!");
+    for(let i = 1; i < mainArr.length; i++) {
+        var key = mainArr[i];
+        bars[i].style.backgroundColor = "green";
+        var j = i - 1;
+        while(j >= 0 && mainArr[j] > key) {
+            bars[j].style.backgroundColor = "red";
+            bars[j + 1].style.backgroundColor = "red";
+
+            swap(j+1, j, bars[j+1], bars[j]);
+            // mainArr[j + 1] = mainArr[j];
+            if(i < mainArr.length-1) {
+                bars[i + 1].style.backgroundColor = "green";
+            }
+            
+            
+            await sleep(5);
+            
+            bars[j].style.backgroundColor = "white";
+            bars[j + 1].style.backgroundColor = "white";
+            j -= 1;
         }
-        else {
-            bars[i].style.backgroundColor = "green";
-        }
-        await sleep(1);
+
+        mainArr[j + 1] = key;
+        await sleep(5);
+        bars[i].style.backgroundColor = "white";
+        bars[j + 1].style.backgroundColor = "white";
     }
+    console.log(`Numbers: ${mainArr}`);
+    check();
 }
